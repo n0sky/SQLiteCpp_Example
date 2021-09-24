@@ -16,7 +16,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # or set them in the cmake command line (see for instance provided build.bat/build.sh scripts)
 set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
 set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
-add_subdirectory(SQLiteCpp)
+
+add_subdirectory(SQLiteCppInternal)
 
 # Add main.cpp example source code to the executable
 add_executable(SQLiteCpp_Example src/main.cpp)
