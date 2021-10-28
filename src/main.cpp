@@ -69,14 +69,29 @@ int main ()
             std::cout << "row (" << query.getColumn(0) << ", \"" << query.getColumn(1) << "\")\n";
         }
 
-        db.exec("DROP TABLE test");
+        // add a column
+        std::string addColCmd = "alter TABLE test ADD COLUMN col2 TEXT";
+        db.exec(addColCmd);
+
+        // insert 2 column
+        SQLite::Statement insertCmd(db, "INSERT INTO test (value, col2) VALUES(?, ?)");
+        insertCmd.bind(1, "val21");
+        insertCmd.bind(2, "val22");
+        insertCmd.exec();
+
+        // insert 1 column
+        SQLite::Statement insertCmd2(db, "INSERT INTO test (value) VALUES(?)");
+        insertCmd2.bind(1, "val31");
+        insertCmd2.exec();
+
+//        db.exec("DROP TABLE test");
     }
     catch (std::exception& e)
     {
         std::cout << "SQLite exception: " << e.what() << std::endl;
         return EXIT_FAILURE; // unexpected error : exit the example program
     }
-    remove("test.db3");
+//    remove("test.db3");
 
     std::cout << "everything ok, quitting\n";
 
